@@ -20,7 +20,7 @@ def pil_to_base64(image: Image.Image) -> str:
 PROCESSOR_ID = "Qwen/Qwen2.5-VL-3B-Instruct" 
 GGUF_MODEL_REPO_ID = "mradermacher/VLM-R1-Qwen2.5VL-3B-OVD-0321-i1-GGUF"
 # 請使用正確的檔名，我們使用 Q4_K_M
-GGUF_MODEL_FILENAME = "VLM-R1-Qwen2.5VL-3B-OVD-0321.i1-Q4_K_M.gguf" 
+GGUF_MODEL_FILENAME = "VLM-R1-Qwen2.5VL-3B-OVD-0321.i1-Q6_K.gguf" 
 
 # 1. 載入 GGUF 模型 (使用 Llama 類)
 print(f"正在載入 GGUF 模型: {GGUF_MODEL_REPO_ID}...")
@@ -28,8 +28,8 @@ try:
     llm = Llama.from_pretrained(
         repo_id=GGUF_MODEL_REPO_ID,
         filename=GGUF_MODEL_FILENAME,
-        n_ctx=32768,          
-        n_gpu_layers=-1    # 在 CPU 上運行
+        n_ctx=103538,          
+        n_gpu_layers=-1
     )
     print("模型載入成功。")
 except Exception as e:
@@ -44,8 +44,8 @@ print("處理器載入成功。")
 
 # --- 準備輸入 ---
 
-IMAGE_PATH = "./test.png"  
-PROMPT = "圖片中人物的位置在哪裡？"
+IMAGE_PATH = "./test1.png"  
+PROMPT = "圖片中有多少人？"
 
 if not os.path.exists(IMAGE_PATH):
     print(f"\n錯誤：找不到圖片檔案 '{IMAGE_PATH}'。")
@@ -76,12 +76,12 @@ output = llm(
     max_tokens=512,
     stop=["<|im_end|>"],  
     echo=False,          
-    temperature=0.1
+    temperature=0.9
 )
 
 # 6. 輸出結果
 response_text = output["choices"][0]["text"].strip()
-
+print(response_text)
 # 清理可能的特殊結束標記
 final_answer = response_text.replace("<|im_end|>", "").strip()
 
