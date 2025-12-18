@@ -2,6 +2,8 @@ https://cloud.deepdataspace.com/zh/playground/ivp
 
 https://github.com/IDEA-Research/GroundingDINO
 
+https://github.com/IDEA-Research/Rex-Omni
+
 https://blog.csdn.net/cs517614679/article/details/144527002
 
 https://zhuanlan.zhihu.com/p/680808735
