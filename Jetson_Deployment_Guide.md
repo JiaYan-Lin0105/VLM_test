@@ -71,6 +71,38 @@ results = model("image.jpg")
 
 ---
 
+## ⚡ C++ 加速部署 (進階)
+
+如果您是嵌入式 C++ 開發者，可以直接使用 TensorRT C++ API 來獲得極致的效能。
+
+### 步驟 1: 準備 C++ 程式碼
+我已經為您準備了一個範例 C++ 推論程式 `yolo_inference.cpp` 和 `CMakeLists.txt`，位於 `cpp_deploy/` 資料夾中。
+
+### 步驟 2: 編譯 C++ 程式
+將 `cpp_deploy/` 資料夾複製到 Jetson 上，然後編譯：
+
+```bash
+cd cpp_deploy
+mkdir build
+cd build
+cmake ..
+make -j$(nproc)
+```
+
+### 步驟 3: 執行 C++ 推論
+編譯完成後，會生成 `yolo_cpp` 執行檔。請使用您在 Jetson 上生成的引擎檔來運行它：
+
+```bash
+# 用法: ./yolo_cpp <引擎路徑> <圖片路徑>
+./yolo_cpp ../../yolov11x.engine ../../test_image.jpg
+```
+
+**注意：**
+- C++ 程式碼範例僅展示了核心的 TensorRT 推論部分（載入引擎、預處理、推理）。
+- 完整的 YOLO 後處理（NMS, 座標還原）在 C++ 中較為繁瑣，可以使用像是 `tensorrt_yolo` 等開源庫來簡化。
+
+---
+
 ## 📋 常見問題
 
 ### Q: 為什麼不能用 Windows 的 `.engine`？
