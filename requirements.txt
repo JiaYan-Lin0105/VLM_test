@@ -1,0 +1,13 @@
+numpy
+rank_bm25
+sentence-transformers==2.7.0
+pypdf
+transformers==4.36.2
+accelerate==0.26.1
+Pillow
+scipy
+tiktoken
+einops
+transformers_stream_generator
+# Optional: flash-attn (requires compatible GPU and long build time, uncomment if needed)
+# flash-attn --no-build-isolation

@@ -1,0 +1,18 @@
+services:
+  rag-app:
+    build: .
+    container_name: rag-container
+    ports:
+      - "8888:8888" # Exposing port if you run Jupyter later
+    volumes:
+      - .:/app # Mount current directory to /app for development
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all # Use all GPU(s)
+              capabilities: [gpu]
+    stdin_open: true # interactive mode
+    tty: true
+    command: python RAG/RAG.py
